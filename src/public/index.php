@@ -13,6 +13,7 @@ use Phalcon\Config;
 use Phalcon\Session\Manager;
 use Phalcon\Session\Adapter\Stream;
 use Phalcon\Http\Response\Cookies;
+use Phalcon\Config\ConfigFactory;
 
 $config = new Config([]);
 
@@ -57,17 +58,25 @@ $application = new Application($container);
 $container->set(
     'db',
     function () {
+        $config=$this->get('config')->db;
         return new Mysql(
             [
-                'host'     => 'mysql-server',
-                'username' => 'root',
-                'password' => 'secret',
-                'dbname'   => 'phalcon',
+                'host'     => $config->host,
+                'username' => $config->username,
+                'password' => $config->password,
+                'dbname'   => $config->dbname,
             ]
         );
     }
 );
-
+$container->set(
+    'config',
+    function () {
+        $file='../app/etc/config.php';
+        $factory=new ConfigFactory();
+        return $factory->newInstance('php', $file);
+    }
+);
 $container->setShared(
     'session',
     function () {
@@ -82,6 +91,7 @@ $container->setShared(
         return $session;
     }
 );
+
 $container->set(
     'cookies',
     function () {
