@@ -1,0 +1,22 @@
+<h1 class="text-danger">Lets try to hack!</h1>
+<?php  echo $this->tag->form(''); ?>
+<p>
+    <?php
+        echo $this->tag->textField('name');
+    ?>
+</p>
+<p>
+    <?php
+        echo $this->tag->textField('script');
+    ?>
+</p>
+<p>
+    <?php
+        echo $this->tag->submitButton(
+            [
+                'hack!',
+                'class'=>'btn btn-danger'
+            ]
+        );
+    ?>
+</p>

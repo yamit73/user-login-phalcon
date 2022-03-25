@@ -14,6 +14,7 @@ use Phalcon\Session\Manager;
 use Phalcon\Session\Adapter\Stream;
 use Phalcon\Http\Response\Cookies;
 use Phalcon\Config\ConfigFactory;
+use Phalcon\Escaper;
 
 $config = new Config([]);
 
@@ -105,6 +106,12 @@ $container->set(
     'serverDate',
     function() {
         return date('Y-m-d , H:i:s');
+    }
+);
+$container->set(
+    'escaper',
+    function() {
+        return new Escaper();
     }
 );
 try {

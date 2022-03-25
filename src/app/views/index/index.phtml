@@ -12,3 +12,20 @@ echo $this->tag->linkTo(
     'login',
     '<br>Login here'
 );
+echo $this->tag->linkTo(
+    [
+        'hacker',
+        '<h4>Lets try to hack homepage</h4>',
+        'class'=>'text-danger'
+    ]
+);
+echo '<table class="table table-hover">
+        <tr>
+            <th>Name</th>
+            <th>Script</th>
+        </tr>';
+foreach ($hackers as $hacker) {
+   echo '<tr><td>'.$hacker->name.'</td>
+        <td>'.$hacker->script.'</td></tr>';
+}
+echo'</table>';
